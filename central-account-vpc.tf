@@ -53,6 +53,40 @@ resource "aws_route" "central_to_consumer_account_vpc_route" {
 }
 
 #######################################################
+# Create a VPC endpoint service with private DNS enabled
+#######################################################
+resource "aws_vpc_endpoint_service" "shared_endpoint_service" {
+  network_load_balancer_arns = [module.nlb.arn]
+  acceptance_required        = false
+  private_dns_name = local.app_domain
+  supported_regions          = ["ap-southeast-1"]
+
+  tags = {
+    Name = "enpoint-service-${local.central_account_app_name}"
+  }
+}
+
+
+#######################################################
+#We will share this endpoint with all the consumer accounts
+#######################################################
+resource "aws_vpc_endpoint" "shared_interface_endpoint" {
+  vpc_id              = module.central_account_vpc.vpc_id
+  service_name        = aws_vpc_endpoint_service.shared_endpoint_service.service_name
+  vpc_endpoint_type   = "Interface"
+  private_dns_enabled = false
+  security_group_ids  = [module.app_sg.security_group_id]
+  subnet_ids          = module.central_account_vpc.private_subnets
+
+  tags = {
+    Name = "Shared interface endpoint"
+  }
+
+  depends_on = [aws_vpc_endpoint_service.shared_endpoint_service]
+}
+
+
+#######################################################
 # VPC interface endpoint for SQS
 #######################################################
 # resource "aws_vpc_endpoint" "sqs_endpoint" {
