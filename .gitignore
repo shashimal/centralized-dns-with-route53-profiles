@@ -1,0 +1,6 @@
+/terraform.tfstate.backup
+/terraform.tfstate
+/.terraform/
+/centralized-dns-with-route53-profiles.iml
+/.idea/
+/builds/
