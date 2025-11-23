@@ -4,3 +4,6 @@
 /centralized-dns-with-route53-profiles.iml
 /.idea/
 /builds/
+/.venv/
+architecture-diagram
+architecture-diagram.gv
