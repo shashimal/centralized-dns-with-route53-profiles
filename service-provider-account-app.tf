@@ -21,11 +21,11 @@ module "ec2_instance" {
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = "~>6.1"
 
-  name                        = local.central_account_app_name
+  name                        = local.service_provider_app_name
   ami                         = data.aws_ami.amazon_linux.id
   instance_type               = local.instance_type
   vpc_security_group_ids      = [module.app_sg.security_group_id]
-  subnet_id                   = module.central_account_vpc.private_subnets[0]
+  subnet_id                   = module.service_provider_account_vpc.private_subnets[0]
   user_data_base64            = base64encode(local.user_data)
   user_data_replace_on_change = true
   monitoring                  = false
@@ -38,10 +38,10 @@ module "nlb" {
   source  = "terraform-aws-modules/alb/aws"
   version = "~> 9.13"
 
-  name               = "${local.central_account_app_name}-nlb"
+  name               = "${local.service_provider_app_name}-nlb"
   load_balancer_type = "network"
-  vpc_id             = module.central_account_vpc.vpc_id
-  subnets            = module.central_account_vpc.private_subnets
+  vpc_id             = module.service_provider_account_vpc.vpc_id
+  subnets            = module.service_provider_account_vpc.private_subnets
   internal           = true
 
   create_security_group      = false
@@ -95,10 +95,10 @@ module "app_sg" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~>5.2"
 
-  name                = local.central_account_app_name
-  description         = local.central_account_app_name
-  vpc_id              = module.central_account_vpc.vpc_id
-  ingress_cidr_blocks = [module.central_account_vpc.vpc_cidr_block, module.consumer_account_vpc.vpc_cidr_block]
+  name                = local.service_provider_app_name
+  description         = local.service_provider_app_name
+  vpc_id              = module.service_provider_account_vpc.vpc_id
+  ingress_cidr_blocks = [module.service_provider_account_vpc.vpc_cidr_block, module.consumer_account_vpc.vpc_cidr_block]
   ingress_rules       = ["http-80-tcp", "https-443-tcp"]
   egress_rules        = ["all-all"]
 }

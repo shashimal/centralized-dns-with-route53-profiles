@@ -1,7 +1,7 @@
 #######################################################
 # Central TGW for cross-account VPC connectivity
 ######################################################
-resource "aws_ec2_transit_gateway" "central_tgw" {
+resource "aws_ec2_transit_gateway" "service_provider_tgw" {
   description = "Central TGW for cross-account VPC connectivity"
 
   default_route_table_association = "enable"
@@ -15,13 +15,13 @@ resource "aws_ec2_transit_gateway" "central_tgw" {
 #######################################################
 # TGW attachment with central account VPC
 ######################################################
-resource "aws_ec2_transit_gateway_vpc_attachment" "central_vpc_attachment" {
-  transit_gateway_id = aws_ec2_transit_gateway.central_tgw.id
-  vpc_id             = module.central_account_vpc.vpc_id
-  subnet_ids         = module.central_account_vpc.private_subnets
+resource "aws_ec2_transit_gateway_vpc_attachment" "service_provider_vpc_attachment" {
+  transit_gateway_id = aws_ec2_transit_gateway.service_provider_tgw.id
+  vpc_id             = module.service_provider_account_vpc.vpc_id
+  subnet_ids         = module.service_provider_account_vpc.private_subnets
 
   tags = {
-    Name = "central-vpc-attachment-request"
+    Name = "service-provider-vpc-attachment-request"
   }
 }
 

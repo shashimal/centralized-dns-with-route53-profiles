@@ -18,6 +18,10 @@ module "test_function_in_consumer_account" {
 
   create_role = false
 
+  environment_variables = {
+    APP_DOMAIN = local.app_domain
+  }
+
   lambda_role = module.consumer_lambda_role.arn
 
   memory_size = 128
@@ -47,7 +51,7 @@ module "consumer_lambda_role" {
     aws = aws.consumer-account
   }
 
-  name = "shared-vpc-endpoint-lambda-role"
+  name = "consomer-lambda-role"
 
   trust_policy_permissions = {
     TrustRoleAndServiceToAssume = {

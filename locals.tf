@@ -7,10 +7,10 @@ locals {
   #######################################################
   # Central AWS account
   ########################################################
-  central_account_app_name            = "service-provider-app"
-  central_account_vpc_cidr            = "10.0.0.0/16"
-  central_account_vpc_public_subnets  = ["10.0.1.0/24", "10.0.2.0/24"]
-  central_account_vpc_private_subnets = ["10.0.11.0/24", "10.0.12.0/24"]
+  service_provider_app_name            = "service-provider-app"
+  service_provider_vpc_cidr            = "10.0.0.0/16"
+  service_provider_vpc_public_subnets  = ["10.0.1.0/24", "10.0.2.0/24"]
+  service_provider_vpc_private_subnets = ["10.0.11.0/24", "10.0.12.0/24"]
 
 
   #######################################################

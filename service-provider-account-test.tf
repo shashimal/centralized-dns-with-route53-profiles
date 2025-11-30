@@ -11,12 +11,16 @@ module "test_function_in_central_account" {
   runtime       = "nodejs22.x"
   source_path   = "${path.module}/lambda"
 
-  vpc_subnet_ids         = module.central_account_vpc.private_subnets
+  vpc_subnet_ids         = module.service_provider_account_vpc.private_subnets
   vpc_security_group_ids = [module.app_sg.security_group_id]
 
   create_role = false
 
   lambda_role = module.lambda_role.arn
+
+  environment_variables = {
+    APP_DOMAIN = local.app_domain
+  }
 
   memory_size = 128
   timeout     = 40

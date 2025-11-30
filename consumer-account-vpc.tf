@@ -49,7 +49,7 @@ module "consumer_account_vpc" {
 resource "aws_ec2_transit_gateway_vpc_attachment" "consumer_account_vpc_attachment" {
   provider = aws.consumer-account
 
-  transit_gateway_id = aws_ec2_transit_gateway.central_tgw.id
+  transit_gateway_id = aws_ec2_transit_gateway.service_provider_tgw.id
   vpc_id             = module.consumer_account_vpc.vpc_id
   subnet_ids         = module.consumer_account_vpc.private_subnets
 
@@ -71,8 +71,8 @@ resource "aws_route" "consumer_to_provider_account_vpc_route" {
 
   provider               = aws.consumer-account
   route_table_id         = each.value
-  destination_cidr_block = module.central_account_vpc.vpc_cidr_block
-  transit_gateway_id     = aws_ec2_transit_gateway.central_tgw.id
+  destination_cidr_block = module.service_provider_account_vpc.vpc_cidr_block
+  transit_gateway_id     = aws_ec2_transit_gateway.service_provider_tgw.id
 
   depends_on = [
     module.consumer_account_vpc,

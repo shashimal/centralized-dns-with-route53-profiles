@@ -16,9 +16,9 @@ resource "aws_ram_resource_share_accepter" "route53_profile_accepter_consumer_ac
 }
 
 
-resource "aws_route53profiles_association" "ass" {
+resource "aws_route53profiles_association" "vpc_association" {
   provider    = "aws.consumer-account"
-  name        = "consumer-vpc"
-  profile_id  = aws_route53profiles_profile.central_route53_profile.id
+  name        = "consumer-vpc-associaiton"
+  profile_id  = aws_route53profiles_profile.service_provider_route53_profile.id
   resource_id = module.consumer_account_vpc.vpc_id
 }
