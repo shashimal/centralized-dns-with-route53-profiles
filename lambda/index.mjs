@@ -1,5 +1,5 @@
 export const handler = async (event) => {
-    const url = process.env.APP_DOMAIN;
+    const url = "https://"+ process.env.APP_DOMAIN;
 
     if (!url) {
         return {

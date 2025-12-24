@@ -54,6 +54,7 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "consumer_account_vpc_attachme
   subnet_ids         = module.consumer_account_vpc.private_subnets
 
   depends_on = [
+    aws_ec2_transit_gateway.service_provider_tgw,
     aws_ram_resource_share_accepter.tgw_accepter_consumer_account
   ]
 
@@ -76,6 +77,7 @@ resource "aws_route" "consumer_to_provider_account_vpc_route" {
 
   depends_on = [
     module.consumer_account_vpc,
+    aws_ec2_transit_gateway.service_provider_tgw,
     aws_ec2_transit_gateway_vpc_attachment.consumer_account_vpc_attachment
   ]
 }

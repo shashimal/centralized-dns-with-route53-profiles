@@ -6,6 +6,7 @@ resource "aws_route53profiles_resource_association" "shared_interface_associatio
   name         = "shared-endpoint-association"
   profile_id   = aws_route53profiles_profile.service_provider_route53_profile.id
   resource_arn = aws_vpc_endpoint.shared_interface_endpoint.arn
+  depends_on   = [aws_vpc_endpoint.shared_interface_endpoint]
 }
 
 resource "aws_route53_record" "endpoint_service_verification" {
@@ -14,4 +15,10 @@ resource "aws_route53_record" "endpoint_service_verification" {
   type    = aws_vpc_endpoint_service.shared_endpoint_service.private_dns_name_configuration[0].type
   records = [aws_vpc_endpoint_service.shared_endpoint_service.private_dns_name_configuration[0].value]
   ttl     = 60
+}
+
+resource "aws_vpc_endpoint_service_private_dns_verification" "verify_endpoint_service" {
+
+  service_id = aws_vpc_endpoint_service.shared_endpoint_service.id
+  depends_on = [aws_route53_record.endpoint_service_verification]
 }
