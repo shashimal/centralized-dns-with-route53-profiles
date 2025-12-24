@@ -1,7 +1,6 @@
-# Centralized DNS with Route53 Profiles
+# Centralized VPC Interface Endpoints Using AWS Route 53 Profiles
 
-This Terraform project implements a centralized DNS architecture using AWS Route53 profiles across multiple AWS accounts, enabling secure DNS resolution for shared services through VPC endpoints.
-
+This Terraform project implements a centralized VPC interface endpoint architecture using AWS Route53 profiles across multiple AWS accounts, enabling secure DNS resolution for shared services through VPC endpoints.
 ## Architecture Overview
 
 ![Architecture Diagram](architecture.png)
