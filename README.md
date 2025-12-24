@@ -4,7 +4,7 @@ This Terraform project implements a centralized DNS architecture using AWS Route
 
 ## Architecture Overview
 
-![Architecture Diagram]
+![Architecture Diagram](architecture.png)
 
 The solution consists of:
 
