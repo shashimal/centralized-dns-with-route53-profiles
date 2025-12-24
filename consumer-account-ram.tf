@@ -1,7 +1,7 @@
 #Accepting the RAM TGW resource share in consumer account
 resource "aws_ram_resource_share_accepter" "tgw_accepter_consumer_account" {
   provider  = "aws.consumer-account"
-  share_arn = aws_ram_resource_share.central_tgw_share.arn
+  share_arn = aws_ram_resource_share.service_provider_tgw_share.arn
   depends_on = [
     aws_ram_principal_association.consumer_account_association
   ]
@@ -11,7 +11,7 @@ resource "aws_ram_resource_share_accepter" "route53_profile_accepter_consumer_ac
   provider  = "aws.consumer-account"
   share_arn = aws_ram_resource_share.route53_profile_share.arn
   depends_on = [
-    aws_ram_principal_association.route53_profile__association
+    aws_ram_principal_association.route53_profile_association
   ]
 }
 
@@ -21,4 +21,7 @@ resource "aws_route53profiles_association" "vpc_association" {
   name        = "consumer-vpc-associaiton"
   profile_id  = aws_route53profiles_profile.service_provider_route53_profile.id
   resource_id = module.consumer_account_vpc.vpc_id
+  depends_on = [
+    aws_ram_resource_share_accepter.route53_profile_accepter_consumer_account
+  ]
 }
