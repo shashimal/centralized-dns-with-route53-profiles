@@ -16,9 +16,9 @@ locals {
   #######################################################
   # Consumer AWS account
   #######################################################
-  counsumer_account_id          = 207567773051
-  counsumer_app_name            = "counsumer-app"
-  counsumer_vpc_cidr            = "20.0.0.0/16"
-  counsumer_vpc_public_subnets  = ["20.0.1.0/24", "20.0.2.0/24"]
-  counsumer_vpc_private_subnets = ["20.0.11.0/24", "20.0.12.0/24"]
+  consumer_account_id          = 207567773051
+  consumer_app_name            = "consumer-app"
+  consumer_vpc_cidr            = "20.0.0.0/16"
+  consumer_vpc_public_subnets  = ["20.0.1.0/24", "20.0.2.0/24"]
+  consumer_vpc_private_subnets = ["20.0.11.0/24", "20.0.12.0/24"]
 }

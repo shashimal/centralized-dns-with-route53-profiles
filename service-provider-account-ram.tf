@@ -16,7 +16,7 @@ resource "aws_ram_resource_association" "tgw_resource_association" {
 
 resource "aws_ram_principal_association" "consumer_account_association" {
   resource_share_arn = aws_ram_resource_share.service_provider_tgw_share.arn
-  principal          = local.counsumer_account_id
+  principal          = local.consumer_account_id
 }
 
 
@@ -38,5 +38,5 @@ resource "aws_ram_resource_association" "route53_profile_resource_association" {
 
 resource "aws_ram_principal_association" "route53_profile_association" {
   resource_share_arn = aws_ram_resource_share.route53_profile_share.arn
-  principal          = local.counsumer_account_id
+  principal          = local.consumer_account_id
 }

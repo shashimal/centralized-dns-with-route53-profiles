@@ -62,7 +62,7 @@ resource "aws_vpc_endpoint_service" "shared_endpoint_service" {
   supported_regions          = ["ap-southeast-1"]
 
   tags = {
-    Name = "enpoint-service-${local.service_provider_app_name}"
+    Name = "endpoint-service-${local.service_provider_app_name}"
   }
 }
 

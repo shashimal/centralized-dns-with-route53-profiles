@@ -36,8 +36,8 @@ module "consumer_lambda_sg" {
     aws = aws.consumer-account
   }
 
-  name                = local.counsumer_app_name
-  description         = local.counsumer_app_name
+  name                = local.consumer_app_name
+  description         = local.consumer_app_name
   vpc_id              = module.consumer_account_vpc.vpc_id
   ingress_cidr_blocks = [module.consumer_account_vpc.vpc_cidr_block]
   ingress_rules       = ["http-80-tcp", "https-443-tcp"]

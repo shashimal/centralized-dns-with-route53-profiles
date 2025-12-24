@@ -14,12 +14,12 @@ module "consumer_account_vpc" {
     aws = aws.consumer-account
   }
 
-  name = "${local.counsumer_app_name}-vpc"
-  cidr = local.counsumer_vpc_cidr
+  name = "${local.consumer_app_name}-vpc"
+  cidr = local.consumer_vpc_cidr
 
   azs             = ["${local.aws_region}a", "${local.aws_region}b"]
-  public_subnets  = local.counsumer_vpc_public_subnets
-  private_subnets = local.counsumer_vpc_private_subnets
+  public_subnets  = local.consumer_vpc_public_subnets
+  private_subnets = local.consumer_vpc_private_subnets
 
   enable_nat_gateway     = true
   single_nat_gateway     = true
@@ -30,7 +30,7 @@ module "consumer_account_vpc" {
 
 
   tags = {
-    Name = "${local.counsumer_app_name}-vpc"
+    Name = "${local.consumer_app_name}-vpc"
   }
 
   private_subnet_tags = {
