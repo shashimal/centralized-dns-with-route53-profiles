@@ -14,7 +14,7 @@ resource "aws_route53_record" "endpoint_service_verification" {
   name    = aws_vpc_endpoint_service.shared_endpoint_service.private_dns_name_configuration[0].name
   type    = aws_vpc_endpoint_service.shared_endpoint_service.private_dns_name_configuration[0].type
   records = [aws_vpc_endpoint_service.shared_endpoint_service.private_dns_name_configuration[0].value]
-  ttl     = 60
+  ttl     = 20
 }
 
 resource "aws_vpc_endpoint_service_private_dns_verification" "verify_endpoint_service" {

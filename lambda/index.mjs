@@ -10,7 +10,7 @@ export const handler = async (event) => {
 
     try {
         const response = await fetch(url);
-        const data = await response.text(); // use .json() if your API returns JSON
+        const data = await response.text();
 
         console.log("Response from endpoint:", data);
 
